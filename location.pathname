@@ -1,0 +1,23 @@
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
+export default function BottomNav() {
+  const location = useLocation()
+  const isActive = (path) => location.pathname === path ? 'text-blue-600 font-bold' : 'text-slate-500'
+
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-2 z-50 shadow-lg">
+      <Link to="/" className={`flex flex-col items-center text-xs ${isActive('/')}`}>
+        <span className="text-xl">🏠</span>
+        <span>Inicio</span>
+      </Link>
+      <Link to="/new" className="relative -top-5 bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/40 text-2xl active:scale-95 transition">
+        ➕
+      </Link>
+      <Link to="/company" className={`flex flex-col items-center text-xs ${isActive('/company')}`}>
+        <span className="text-xl">⚙️</span>
+        <span>Ajustes</span>
+      </Link>
+    </nav>
+  )
+}
