@@ -15,7 +15,7 @@ export default function LoginGoogle() {
     <div className="min-h-screen flex items-center justify-center bg-slate-900 px-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
         <h1 className="text-3xl font-extrabold text-slate-900 mb-2">ProformaPro</h1>
-        <p className="text-slate-600 mb-8">Inicia sesión para gestionar tus cotizaciones profesionales</p>
+        <p className="text-slate-600 mb-8">Inicia sesión con cualquier cuenta de Google</p>
         <button
           onClick={handleLogin}
           className="w-full flex items-center justify-center gap-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl border border-slate-300 transition duration-200 shadow-sm"
