@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import LoginGoogle from './pages/LoginGoogle'
 import NewQuotationWizard from './pages/NewQuotationWizard'
+import CompanyConfigPage from './pages/CompanyConfigPage'
 import BottomNav from './components/BottomNav'
 
 function PrivateRoute({ children }) {
@@ -23,6 +24,11 @@ export default function App() {
                 <NewQuotationWizard />
               </PrivateRoute>
             } />
+            <Route path="/company" element={
+              <PrivateRoute>
+                <CompanyConfigPage />
+              </PrivateRoute>
+            } />
             <Route path="*" element={<Navigate to="/new" replace />} />
           </Routes>
           <BottomNav />
@@ -31,4 +37,3 @@ export default function App() {
     </AuthProvider>
   )
 }
-
