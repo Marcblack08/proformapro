@@ -1,8 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { supabase } from '../services/supabaseClient'
 
 export default function NewQuotationWizard() {
+  const [user, setUser] = useState(null)
   const [clientName, setClientName] = useState('')
   const [items, setItems] = useState([{ description: '', qty: 1, price: 0 }])
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
+    })
+  }, [])
 
   const addItem = () => {
     setItems([...items, { description: '', qty: 1, price: 0 }])
@@ -18,12 +26,21 @@ export default function NewQuotationWizard() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert(`Cotización generada con éxito para ${clientName}. Total: $${total}`)
+    alert(`Cotización generada para ${clientName} por el usuario ${user?.email}. Total: $${total}`)
   }
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-6 mb-12">
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">Nueva Cotización</h1>
+      <div className="flex justify-between items-center mb-6 pb-4 border-b">
+        <h1 className="text-2xl font-bold text-slate-900">Nueva Cotización</h1>
+        {user && (
+          <div className="text-right">
+            <p className="text-xs text-slate-500">Conectado como:</p>
+            <p className="text-sm font-semibold text-blue-600">{user.email}</p>
+          </div>
+        )}
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Nombre del Cliente</label>
